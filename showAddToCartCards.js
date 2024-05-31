@@ -1,10 +1,11 @@
 import { getCartProductFromLS } from "./getCartProductFromLS";
-import { updateCartValue } from "./updateCartValue";
 const productTemplate = document.querySelector("#productCartTemplate");
 const productContainer = document.querySelector("#productCartContainer");
 import products from "./api/products.json";
 import { fetchQuantityFromCartLS } from "./fetchQuantityFromCartLS";
 import { removeProdFromCart } from "./removeProdFromCart";
+import { incrementDecrement } from "./incrementDecrement";
+import { updateCartProductTotal } from "./updateCartProductTotal";
 
 let productSubTotal = document.querySelector('.productSubTotal');
 
@@ -42,19 +43,13 @@ const showCartProduct = () => {
             .addEventListener("click", (event) => {
                 incrementDecrement(event, id, stock, price);
             });
-            
+
         productClone.querySelector('.productQuantity').textContent = lsActaualdata.productQuantity;
         productContainer.append(productClone);
     });
 };
 
+
 showCartProduct();
 
-let SubTotal = 0;
-cardProducts.map((elem) => {
-    SubTotal = SubTotal + elem.price;
-})
-productSubTotal.innerHTML = SubTotal.toFixed(2);
-document.querySelector('.productFinalTotal').innerHTML = (SubTotal + 50).toFixed(2);
-
-showAddToCartCards();
+updateCartProductTotal();

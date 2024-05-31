@@ -1,22 +1,22 @@
-import { getCartProductFromLS } from "./getCartProducts";
+import { getCartProductFromLS } from "./getCartProductFromLS";
 import { updateCartProductTotal } from "./updateCartProductTotal";
 
 export const incrementDecrement = (event, id, stock, price) => {
+
   const currentCardElement = document.querySelector(`#card${id}`);
-  const productQuantity = currentCardElement.querySelector(".productQuantity");
+  const productproductQuantity = currentCardElement.querySelector(".productQuantity");
+
   const productPrice = currentCardElement.querySelector(".productPrice");
 
-  let quantity = 1;
+  let productQuantity = 1;
   let localStoragePrice = 0;
 
-  //   ----------------------------------------
-  //   Get the data from localStorage
-  //   ----------------------------------------
   let localCartProducts = getCartProductFromLS();
+
   let existingProd = localCartProducts.find((curProd) => curProd.id === id);
 
   if (existingProd) {
-    quantity = existingProd.quantity;
+    productQuantity = existingProd.productQuantity;
     localStoragePrice = existingProd.price;
   } else {
     localStoragePrice = price;
@@ -24,40 +24,33 @@ export const incrementDecrement = (event, id, stock, price) => {
   }
 
   if (event.target.className === "cartIncrement") {
-    if (quantity < stock) {
-      quantity += 1;
-    } else if (quantity === stock) {
-      quantity = stock;
+    if (productQuantity < stock) {
+      productQuantity += 1;
+    } else if (productQuantity === stock) {
+      productQuantity = stock;
       localStoragePrice = price * stock;
     }
   }
 
   if (event.target.className === "cartDecrement") {
-    if (quantity > 1) {
-      quantity -= 1;
+    if (productQuantity > 1) {
+      productQuantity -= 1;
     }
   }
 
-  //   finally we will update the price in localStorage
-  localStoragePrice = price * quantity;
-  localStoragePrice = Number(localStoragePrice.toFixed(2));
+  localStoragePrice = price * productQuantity;
 
-  let updatedCart = { id, quantity, price: localStoragePrice };
+  localStoragePrice = localStoragePrice.toFixed(2);
+  let updatedCart = { id, productQuantity, price: localStoragePrice };
 
   updatedCart = localCartProducts.map((curProd) => {
     return curProd.id === id ? updatedCart : curProd;
   });
-  //   console.log(updatedCart);
-  localStorage.setItem("cartProductLS", JSON.stringify(updatedCart));
 
-  //   also we need to reflect the changes on the screen too
-  productQuantity.innerText = quantity;
+  console.log(updatedCart);
   productPrice.innerText = localStoragePrice;
-
-  //todo Don't Forget To LIKE SHARE & SUBSCRIBE TO THAPA TECHNCIAL YOUTUBE CHANNEL 👉 https://www.youtube.com/thapatechnical
-
-  // -----------------------------------------------------
-  // calculating the card total in our cartProducts page
-  // --------------------------------------------------------
+  productproductQuantity.innerHTML = productQuantity;
+  localStorage.setItem("cartProductLS", JSON.stringify(updatedCart));
   updateCartProductTotal();
+
 };

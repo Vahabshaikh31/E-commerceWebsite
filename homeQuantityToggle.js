@@ -1,5 +1,6 @@
 export const homeQuantityToggle = (event, id, stock) => {
     const currentCardElement = document.querySelector(`#card${id}`);
+    
     const productQuantity = currentCardElement.querySelector('.productQuantity')
     const cart  = document.querySelector(".fa-solid");
     

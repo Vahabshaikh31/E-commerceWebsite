@@ -1,5 +1,6 @@
 import { getCartProductFromLS } from "./getCartProductFromLS";
 import { updateCartValue } from "./updateCartValue";
+
 getCartProductFromLS();
 
 export const addToCart = (event, id, stock) => {
@@ -25,11 +26,11 @@ export const addToCart = (event, id, stock) => {
             return curProd.id === id ? updatedCart : curProd;
         });
 
-        console.log(updatedCart);
+
         localStorage.setItem("cartProductLS", JSON.stringify(updatedCart));
 
     }
-    console.log(arrLocalStorageProduct);
+    // console.log(arrLocalStorageProduct);
 
     if (existingproduct) {
         return false;
@@ -37,8 +38,11 @@ export const addToCart = (event, id, stock) => {
 
     price = Number(price * productQuantity);
     productQuantity = Number(productQuantity);
+
     let updateCart = { id, price, productQuantity };
+
     arrLocalStorageProduct.push(updateCart);
+
     localStorage.setItem('cartProductLS', JSON.stringify(arrLocalStorageProduct));
 
     updateCartValue(arrLocalStorageProduct);
