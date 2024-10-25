@@ -35,7 +35,8 @@ export const showProductContainer = (products) => {
     productClone
       .querySelector(".add-to-cart-button")
       .addEventListener("click", (event) => {
-        addToCart(event, id, stock);
+        addToCart(event, id, stock, name);
+
       });
 
     productContainer.append(productClone);

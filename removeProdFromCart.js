@@ -1,9 +1,10 @@
 import { getCartProductFromLS } from "./getCartProductFromLS";
+import { showToast } from "./showToast";
 // import { showToast } from "./showToast";
 // import { updateCartProductTotal } from "./updateCartProductTotal";
 import { updateCartValue } from "./updateCartValue";
 
-export const removeProdFromCart = (id) => {
+export const removeProdFromCart = (id , name ) => {
   let cartProducts = getCartProductFromLS();
 
   cartProducts = cartProducts.filter((curProd) => curProd.id != id);
@@ -14,7 +15,7 @@ export const removeProdFromCart = (id) => {
   let removeDiv = document.getElementById(`card${id}`);
   if (removeDiv) {
     removeDiv.remove();
-    showToast("delete", id);
+    showToast("delete", name);
   }
 
   // // -----------------------------------------------------

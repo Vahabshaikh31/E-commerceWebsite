@@ -54,3 +54,4 @@ export const incrementDecrement = (event, id, stock, price) => {
   updateCartProductTotal();
 
 };
+

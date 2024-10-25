@@ -36,7 +36,8 @@ const showCartProduct = () => {
 
         productClone
             .querySelector(".remove-to-cart-button")
-            .addEventListener("click", () => removeProdFromCart(id));
+            .addEventListener("click", () => removeProdFromCart(id , name));
+
 
         productClone
             .querySelector(".stockElement")
